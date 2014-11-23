@@ -1,0 +1,180 @@
+<xref>
+  <whenMade>1416760421005</whenMade>
+  <createdBy>JBehave</createdBy>
+  <metaFilter></metaFilter>
+  <meta/>
+  <stories>
+    <story>
+      <description></description>
+      <narrative></narrative>
+      <name>EcoulementGrain.story</name>
+      <path>file:/Users/sbuisson/Documents/workspace/sandPropre/target/test-classes/story/EcoulementGrain.story</path>
+      <html>story.EcoulementGrain.html</html>
+      <meta></meta>
+      <scenarios>Scenario:l&apos;effet de l&apos;action bouge, en fonction du terrain
+Given Un terrain de dimention(10,10)
+Given Un grain g1 de type sable
+Given Un grain g1 a la position (4,5)
+When Run action on g1
+Then Le grain g1 est a (4,6)
+Given Un terrain de dimention(10,10)
+Given Un grain g1 de type sable
+Given Un grain g1 a la position (4,5)
+Given Un grain g2 de type sable
+Given Un grain g2 a la position (4,6) // la position souhaitée est occupée
+When Run action on g1
+Then Le grain g1 est a (?,6)
+
+
+</scenarios>
+      <passed>false</passed>
+      <started>1416760420195</started>
+      <duration>113</duration>
+    </story>
+    <story>
+      <description></description>
+      <narrative></narrative>
+      <name>PourLesGrainsDUneBulle.story</name>
+      <path>file:/Users/sbuisson/Documents/workspace/sandPropre/target/test-classes/story/PourLesGrainsDUneBulle.story</path>
+      <html>story.PourLesGrainsDUneBulle.html</html>
+      <meta></meta>
+      <scenarios>Scenario:
+
+
+Scenario:Comportement d&apos;un grain d&apos;un ensemble en fonction de la zone de l&apos;ensemble auquel il appartient
+Given Un grain g1
+Given Le grain g1 est dans la zone interne
+When Run action on g1
+Then Le grain g1 est lissé
+Given Un grain g1
+Given Le grain g1 est dans la zone intermediaire
+When Run action on g1
+Then Le grain g1 se rapproche
+Given Un grain g1
+Given Le grain g1 est dans la zone externe
+When Run action on g1
+Then Le grain g1 quitte l&apos;ensemble
+
+
+Scenario:A partir de la position d&apos;un grain dans un ensemble, determinon la zone de cet ensemble auquel il appartient
+Given Un ensemble e1 de centre (1,1) de taille 10
+Given Le grain g1 a la position (3,3)
+Given g1 dans l&apos;ensemble e1
+Then Le grain g1 est dans la zone interne
+Given Un ensemble e1 de centre (1,1) de taille 5
+Given Le grain g1 a la position (3,3)
+Given g1 dans l&apos;ensemble e1
+Then Le grain g1 est dans la zone intermediaire
+Given Un ensemble e1 de centre (1,1) de taille 5
+Given Le grain g1 a la position (10,10)
+Given g1 dans l&apos;ensemble e1
+Then Le grain g1 est dans la zone externe
+
+
+Scenario:En fonction de l&apos;action auquel un grain est soumis, teste quelle effet cela  aura sur le grain
+Given Un terrain &quot; aa
+ aa
+aaa &quot;
+Given Aux coordonées (1,0) le grain g1
+When Run ActionCreation sur g1
+When Le grain g1 est lissé
+Then Le grain g est a (0,1)
+Given Un terrain &quot; aa
+ aa
+aaa &quot;
+Given Aux coordonées (1,0) le grain g1
+When Run ActionCreation sur g1
+When Le grain g1 est lissé
+Then Le grain g est a (0,1)
+Given Un terrain &quot;aaa
+ aa
+aaa &quot;
+aaa &quot;
+aaa &quot;
+aaa &quot;
+aaaa&quot;
+Given Aux coordonées (0,0) le grain g1
+When Run ActionCreation sur g1
+When Le grain g1 se rapproche
+Then Le grain g1 a pour vitesse (0,4)
+Given Aux coordonées (3,6) le grain g2
+When Le grain g2 se rapproche
+!-- a verifier
+Then Le grain g2 a pour vitesse (0,-4)
+Given Un terrain &quot;aaa
+ aa
+aaa &quot;
+aaa &quot;
+aaa &quot;
+aaa &quot;
+aaaa&quot;
+Given Aux coordonées (0,0) le grain g1
+When Run ActionCreation sur g1
+When Le grain g1 quitte l&apos;ensemble
+Then Le grain g1 n&apos;est pas dans un ensemble
+
+
+Scenario:fusion
+Given Un ensemble e1 de centre (1,1) de taille 15
+Given Un ensemble e2 de centre (1,2) de taille 10
+Given Le grain g1 a la position (1,2)
+Given g1 dans l&apos;ensemble e1
+Given Le grain g1 est dans la zone interne
+Given Le grain g1 est, par rapport à e2, dans la zone interne
+When Run action on $g1
+Then fusion de e1 et e2
+Then Le grain g1 est dans l&apos;ensemble e1
+Given Un ensemble e1 de centre (1,1) de taille 10
+Given Un ensemble e2 de centre (1,2) de taille 15
+Given Le grain g1 a la position (1,2)
+Given g1 dans l&apos;ensemble e1
+Given Le grain g1 est dans la zone interne
+Given Le grain g1 est, par rapport à e2, dans la zone interne
+When Run action on g1
+Then fusion de e2 et e1
+Then Le grain g1 est dans l&apos;ensemble e2
+
+
+</scenarios>
+      <passed>false</passed>
+      <started>1416760420312</started>
+      <duration>205</duration>
+    </story>
+    <story>
+      <description></description>
+      <narrative></narrative>
+      <name>PourLesGrainsFuturBulle.story</name>
+      <path>file:/Users/sbuisson/Documents/workspace/sandPropre/target/test-classes/story/PourLesGrainsFuturBulle.story</path>
+      <html>story.PourLesGrainsFuturBulle.html</html>
+      <meta></meta>
+      <scenarios>Scenario:Decrit le comportement de grains n&apos;appartenant pas encore a une bulle
+Given Le grain g1 a la position (1,1)
+Given Le grain g2 a la position (1,2)
+When Run ActionCreation sur g1
+Then Le grain g1 est dans un ensemble
+Then Le grain g2 est dans un ensemble
+Then Le grain g1 est dans le meme ensemble que g2
+Given Le grain g1 a la position (1,1)
+Given Le grain g2 a la position (1,3)
+When Run ActionCreation sur g1
+Then Le grain g1 n&apos;est pas dans un ensemble
+Then Le grain g2 n&apos;est pas dans un ensemble
+
+
+Scenario:Decrit le comportement de grains en contacte avec une autre bulle
+Given Le grain g1 a la position (1,1)
+Given Le grain g2 a la position (1,3)
+Given g2 dans l&apos;ensemble e2
+When Run ActionCreation sur g1
+Then Le grain g1 est dans le meme ensemble que g2
+Then Le grain g1 est dans l&apos;ensemble e2
+
+
+</scenarios>
+      <passed>false</passed>
+      <started>1416760420520</started>
+      <duration>50</duration>
+    </story>
+  </stories>
+  <stepMatches/>
+</xref>
