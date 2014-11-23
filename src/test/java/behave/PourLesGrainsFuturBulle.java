@@ -15,10 +15,10 @@ public class PourLesGrainsFuturBulle extends AbstractSandBDD {
     ActionCreationBulle actionMock;
 
     @BeforeStory
-    public void init(){
+    public void init() {
 
-        action=new ActionCreationBulle();
-        actionMock=Mockito.mock(ActionCreationBulle.class);
+        action = new ActionCreationBulle();
+        actionMock = Mockito.mock(ActionCreationBulle.class);
 
     }
 
